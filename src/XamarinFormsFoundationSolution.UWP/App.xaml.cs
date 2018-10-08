@@ -1,9 +1,6 @@
-﻿using System;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+﻿using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace XamarinFormsFoundationSolution.UWP
 {
@@ -12,25 +9,15 @@ namespace XamarinFormsFoundationSolution.UWP
         public App()
         {
             InitializeComponent();
-            Suspending += OnSuspending;
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 rootFrame = new Frame();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
                 Xamarin.Forms.Forms.Init(e);
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-
-                }
 
                 Window.Current.Content = rootFrame;
             }
@@ -41,17 +28,6 @@ namespace XamarinFormsFoundationSolution.UWP
             }
 
             Window.Current.Activate();
-        }
-
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
-            deferral.Complete();
         }
     }
 }
